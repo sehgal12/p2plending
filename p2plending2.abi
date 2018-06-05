@@ -1,0 +1,205 @@
+{
+  "version": "eosio::abi/1.0",
+  "types": [{
+      "new_type_name": "account_name",
+      "type": "name"
+  }],
+  "structs": [{
+      "name": "lender_type",
+      "base": "",
+      "fields": [
+        {"name":"lender_n", "type":"account_name"},
+        {"name":"pkey_l", "type":"uint32"},
+        {"name":"balance", "type":"uint32"},
+        {"name":"lending_score", "type":"uint8"},
+        {"name":"age", "type":"uint8"},
+        {"name":"hash_aadhar", "type":"std::string"},
+        {"name":"hash_l", "type":"std::string"},
+        {"name":"verified", "type":"bool"},
+        {"name":"epoch_ist", "type":"uint64"}
+      ]
+    },{
+      "name": "create_lender",
+      "base": "",
+      "fields": [
+        {"name":"lender_n", "type":"account_name"},
+        {"name":"lending_score", "type":"uint8"},
+        {"name":"age", "type":"uint8"},
+        {"name":"hash_aadhar", "type":"std::string"},
+        {"name":"hash_l", "type":"std::string"}
+      ]
+    },{
+      "name": "update_l",
+      "base": "",
+      "fields": [
+        {"name":"pkey_l", "type":"uint32"},
+        {"name":"balance", "type":"uint32"},
+        {"name":"lending_score", "type":"uint8"},
+        {"name":"age", "type":"uint8"},
+        {"name":"hash_aadhar", "type":"std::string"},
+        {"name":"hash_l", "type":"std::string"},
+        {"name":"verified", "type":"bool"}
+      ]
+    },{
+      "name": "close_l",
+      "base": "",
+      "fields": [
+         {"name":"lender_n", "type":"account_name"},
+         {"name":"pkey_l", "type":"uint32"}
+    },{
+      "name": "borrower_type",
+      "base": "",
+      "fields": [
+        {"name":"borrower_n", "type":"account_name"},
+        {"name":"pkey_b", "type":"uint32"},
+        {"name":"cibil_score", "type":"uint16"},
+        {"name":"risk_category", "type":"uint8"},
+        {"name":"age", "type":"uint8"},
+        {"name":"income", "type":"uint32"},
+        {"name":"leverage_ratio", "type":"uint16"},
+        {"name":"hash_aadhar", "type":"std::string"},
+        {"name":"hash_b", "type":"std::string"},
+        {"name":"verified", "type":"bool"},
+        {"name":"epoch_ist", "type":"uint64"}
+    },{
+      "name": "create_borrower",
+      "base": "",
+      "fields": [
+        {"name":"borrower_n", "type":"account_name"},
+        {"name":"pkey_b", "type":"uint32"},
+        {"name":"age", "type":"uint8"},
+        {"name":"income", "type":"uint32"},
+        {"name":"hash_aadhar", "type":"std::string"},
+        {"name":"hash_b", "type":"std::string"}
+    },{
+      "name": "close_b",
+      "base": "",
+      "fields": [
+        {"name":"borrower_n", "type":"account_name"},
+        {"name":"pkey_b", "type":"uint32"}
+      ]
+    },{
+      "name": "update_b",
+      "base": "",
+      "fields": [
+        {"name":"pkey_b", "type":"uint32"},
+        {"name":"cibil_score", "type":"uint16"},
+        {"name":"risk_category", "type":"uint8"},
+        {"name":"age", "type":"uint8"},
+        {"name":"income", "type":"uint32"},
+        {"name":"leverage_ratio", "type":"uint16"},
+        {"name":"hash_aadhar", "type":"std::string"},
+        {"name":"hash_b", "type":"std::string"},
+        {"name":"verified", "type":"bool"}
+      ]
+    },{
+      "name": "lending",
+      "base": "",
+      "fields": [
+        {"name":"pkey_l", "type":"uint32"},
+        {"name":" pkey_b", "type":"uint32"},
+        {"name":"net_borrowed", "type":"uint32"},
+        {"name":"principal", "type":"uint32"},
+        {"name":"penatly", "type":"uint32"},
+        {"name":"maturity", "type":"uint8"},
+        {"name":"months_left", "type":"uint8"},
+        {"name":"emi", "type":"uint8"},
+        {"name":"unique_serial_number", "type":"uint32"},
+        {"name":"loan_id", "type":"uint32"},
+        {"name":"epoch_ist", "type":"uint64"}
+      ]
+    },{
+      "name": "create_lending",
+      "base": "",
+      "fields": [
+        {"name":"pkey_l", "type":"uint32"},
+        {"name":" pkey_b", "type":"uint32"},
+        {"name":"net_borrowed", "type":"uint32"},
+        {"name":"principal", "type":"uint32"},
+        {"name":"penatly", "type":"uint32"},
+        {"name":"maturity", "type":"uint8"},
+        {"name":"emi", "type":"uint8"},
+        {"name":"unique_serial_number", "type":"uint32"},
+        {"name":"loan_id", "type":"uint32"},
+      ]
+    },{
+      "name": "close_lending",
+      "base": "",
+      "fields": [
+        {"name":"loan_id", "type":"uint32"}
+      ]
+    },{
+      "name": "update_lending",
+      "base": "",
+      "fields": [
+        {"name":"months_left", "type":"uint8"},
+        {"name":"penatly", "type":"uint32"},
+        {"name":"loan_id", "type":"uint32"}
+      ]
+    }
+  ],
+  "actions": [{
+      "name": "createl",
+      "type": "create_lender",
+      "ricardian_contract": ""
+    },{
+      "name": "updatel",
+      "type": "update_l"
+      "ricardian_contract": ""
+    },{
+      "name": "closel",
+      "type": "close_l"
+      "ricardian_contract": ""
+    },{
+      "name": "createb",
+      "type": "create_borrower",
+      "ricardian_contract": ""
+    },{
+      "name": "updateb",
+      "type": "update_b",
+      "ricardian_contract": ""
+    },{
+      "name": "closeb",
+      "type": "close_b",
+      "ricardian_contract": ""
+    },{
+      "name": "createlen",
+      "type": "create_lending",
+      "ricardian_contract": ""
+    },{
+      "name": "closelen",
+      "type": "close_lending",
+      "ricardian_contract": ""
+    },{
+      "name": "updatelen",
+      "type": "update_lending",
+      "ricardian_contract": ""
+    },{
+      "name": "closeelen",
+      "type": "close_lending",
+      "ricardian_contract": ""
+    }
+  ],
+  "tables": [{
+        "name": "lenders",
+        "type": "lender_type",
+        "index_type": "i64",
+        "key_names" : ["pkey_l"],
+        "key_types" : ["uint32"]
+      },{
+        "name": "borrowers",
+        "type": "borrower_type",
+        "index_type": "i64",
+        "key_names" : ["pkey_b"],
+        "key_types" : ["uint32"]
+      },{
+        "name": "lendings",
+        "type": "lending",
+        "index_type": "i64",
+        "key_names" : ["unique_serial_number"],
+        "key_types" : ["uint32"]
+      }
+  ],
+  "ricardian_clauses": [],
+  "abi_extensions": []
+}
