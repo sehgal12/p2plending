@@ -1,0 +1,203 @@
+{
+  "version": "eosio::abi/1.0",
+  "types": [{
+      "new_type_name": "account_name",
+      "type": "name"
+  }],
+  "structs": [{
+      "name": "lender_type",
+      "base": "",
+      "fields": [
+        {"name":"lender_n", "type":"account_name"},
+        {"name":"epoch_ist", "type":"uint64"},
+        {"name":"balance", "type":"uint32"},
+        {"name":"total_lending", "type":"uint32"},
+        {"name":"lending_score", "type":"uint8"},
+        {"name":"age", "type":"uint8"},
+        {"name":"verified", "type":"bool"}
+        
+      ]
+    },{
+      "name": "create_lender",
+      "base": "",
+      "fields": [
+        {"name":"lender_n", "type":"account_name"},
+        {"name":"age", "type":"uint8"}
+      ]
+    },{
+      "name": "update_l",
+      "base": "",
+      "fields": [
+        {"name":"lender_n", "type":"account_name"},
+        {"name":"epoch_ist", "type":"uint64"},
+        {"name":"balance", "type":"uint32"},
+        {"name":"lending_score", "type":"uint8"},
+        {"name":"age", "type":"uint8"},
+        {"name":"verified", "type":"bool"}
+        
+      ]
+    },{
+      "name": "close_l",
+      "base": "",
+      "fields": [
+         {"name":"lender_n", "type":"account_name"}
+      ]
+    },{
+      "name": "borrower_type",
+      "base": "",
+      "fields": [
+        {"name":"borrower_n", "type":"account_name"},
+        {"name":"epoch_ist", "type":"uint64"},
+        {"name":"cibil_score", "type":"uint16"},
+        {"name":"age", "type":"uint8"},
+        {"name":"income", "type":"uint32"},
+        {"name":"verified", "type":"bool"}
+        
+        ]
+    },{
+      "name": "create_borrower",
+      "base": "",
+      "fields": [
+        {"name":"borrower_n", "type":"account_name"},
+        {"name":"age", "type":"uint8"},
+        {"name":"income", "type":"uint32"}
+        ]
+    },{
+      "name": "close_b",
+      "base": "",
+      "fields": [
+        {"name":"borrower_n", "type":"account_name"},
+      ]
+    },{
+      "name": "update_b",
+      "base": "",
+      "fields": [
+        {"name":"borrower_n", "type":"account_name"},
+        {"name":"epoch_ist", "type":"uint64"},
+        {"name":"cibil_score", "type":"uint16"},
+        {"name":"age", "type":"uint8"},
+        {"name":"income", "type":"uint32"},
+        {"name":"verified", "type":"bool"}
+        
+      ]
+    },{
+      "name": "lending",
+      "base": "",
+      "fields": [
+        {"name":"borrower_n", "type":"account_name"},
+        {"name":"net_borrowed", "type":"uint32"},
+        {"name":"amount_left", "type":"uint32"},
+        {"name":"maturity", "type":"uint8"},
+        {"name":"interest", "type":"uint8"},
+        {"name":"emi", "type":"uint32"},
+        {"name":"epoch_ist", "type":"uint64"}
+      ]
+    },{
+      "name": "lending_info",
+      "base": "",
+      "fields": [
+        {"name":"lender_n", "type":"account_name"},
+        {"name":"borrower_n", "type":"account_name"},
+        {"name":"penatly", "type":"uint32"},
+        {"name":"principal", "type":"uint32"},
+        {"name":"months_left", "type":"uint8"},
+        {"name":"epoch_ist", "type":"uint64"}
+      ]
+    },{
+      "name": "create_lending",
+      "base": "",
+      "fields": [
+        {"name":"borrower_n", "type":"account_name"},
+        {"name":"net_borrowed", "type":"uint32"},
+        {"name":"maturity", "type":"uint8"},
+        {"name":"interest", "type":"uint8"},
+        {"name":"emi", "type":"uint32"},
+        {"name":"epoch_ist", "type":"uint64"}
+      ]
+    },{
+      "name": "create_lending_info",
+      "base": "",
+      "fields": [
+        {"name":"borrower_n", "type":"account_name"},
+        {"name":"lender_n", "type":"account_name"},
+        {"name":"principal", "type":"uint32"},
+        {"name":"epoch_ist", "type":"uint64"}
+      ]
+    },{
+      "name": "update_lending",
+      "base": "",
+      "fields": [
+        {"name":"borrower_n", "type":"account_name"},
+        {"name":"months_left", "type":"uint8"},
+        {"name":"penatly", "type":"uint32"},
+        {"name":"epoch_ist", "type":"uint64"}
+      ]
+    }
+  ],
+  "actions": [{
+      "name": "createl",
+      "type": "create_lender",
+      "ricardian_contract": ""
+    },{
+      "name": "updatel",
+      "type": "update_l"
+      "ricardian_contract": ""
+    },{
+      "name": "closel",
+      "type": "close_l"
+      "ricardian_contract": ""
+    },{
+      "name": "createb",
+      "type": "create_borrower",
+      "ricardian_contract": ""
+    },{
+      "name": "updateb",
+      "type": "update_b",
+      "ricardian_contract": ""
+    },{
+      "name": "closeb",
+      "type": "close_b",
+      "ricardian_contract": ""
+    },{
+      "name": "createlen",
+      "type": "create_lending",
+      "ricardian_contract": ""
+    },{
+      "name": "createinfo",
+      "type": "create_lending_info",
+      "ricardian_contract": ""
+    },{
+      "name": "updatelen",
+      "type": "update_lending",
+      "ricardian_contract": ""
+    }
+  ],
+  "tables": [{
+        "name": "lenders",
+        "type": "lender_type",
+        "index_type": "i64",
+        "key_names" : ["lender_n"],
+        "key_types" : ["account_name"]
+      },{
+        "name": "borrowers",
+        "type": "borrower_type",
+        "index_type": "i64",
+        "key_names" : ["borrower_n"],
+        "key_types" : ["account_name"]
+      },{
+        "name": "lendings",
+        "type": "lending",
+        "index_type": "i64",
+        "key_names" : ["borrower_n"],
+        "key_types" : ["account_name"]
+      },{
+        "name": "lendinfo",
+        "type": "lending_info",
+        "index_type": "i64",
+        "key_names" : ["borrower_n"],
+        "key_types" : ["account_name"]
+      }
+  ],
+  "ricardian_clauses": [],
+  "abi_extensions": []
+}
