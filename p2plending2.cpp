@@ -260,7 +260,7 @@ struct impl
             auto iter = existing_lender.find(itr->lender_n);
            
             existing_lender.modify(iter, N(adminl), [&]( auto&g1){
-                g1.balance = g1.balance + itr1->emi*((itr->principal)/(itr1->net_borrowed))*(itr->months_left - c.months_left);
+                g1.balance = g1.balance + itr1->emi*(itr->principal)/(itr1->net_borrowed)*(itr->months_left - c.months_left);
             });
            //close lending if the penalty and months left are zero in the input
           if(c.penalty==0 && c.months_left==0){
