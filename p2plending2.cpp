@@ -26,7 +26,7 @@ struct impl
  //some basic checks before any action can be included
 
   void on(const create_lender& c) {
-      require_auth(c.lender_n);
+     // require_auth(c.lender_n);
       //age check
       eosio_assert(c.age >= age_limit, "lender is not eligible by age");
 
@@ -46,7 +46,6 @@ struct impl
          g.lending_score        = 0;
          g.age                  = c.age;
          g.verified             = 0;
-         g.epoch_ist            = 0;
       });
    }
    void on(const update_l& c) {
@@ -60,7 +59,6 @@ struct impl
       eosio_assert(itr != existing_lender.end(), "lender does not exists");
 
       existing_lender.modify(itr, N(adminl), [&]( auto& g ) {
-         g.epoch_ist            = c.epoch_ist;
          g.balance              = c.balance;
          g.lending_score        = c.lending_score;
          g.age                  = c.age;
@@ -82,7 +80,7 @@ struct impl
    }
   void on(const create_borrower& c) {
 
-      require_auth(c.borrower_n);
+      //require_auth(c.borrower_n);
       //age check
       eosio_assert(c.age >= age_limit, "borrower is not eligible by age");
 
@@ -105,7 +103,6 @@ struct impl
          g.age                    = c.age;
          g.income                 = c.income;
          g.verified               = 0;
-         g.epoch_ist              = 0;
 
 
       });
@@ -129,7 +126,6 @@ struct impl
          g.age                    = c.age;
          g.income                 = c.income;
          g.verified               = c.verified;
-         g.epoch_ist              = c.epoch_ist;
 
        });
    }
@@ -185,14 +181,13 @@ struct impl
          g.maturity             = c.maturity;
          g.emi                  = c.emi;
          g.interest             = c.interest;
-         g.epoch_ist            = c.epoch_ist;
       });
 
       
    }
      void on(const create_lending_info& c) {
       
-       require_auth(c.lender_n);
+       //require_auth(c.lender_n);
         // Check if lender exists
       lenders existing_lender(code_account, code_account);
       auto itr1 = existing_lender.find(c.lender_n);
@@ -219,7 +214,6 @@ struct impl
          g1.principal            = c.principal;
          g1.penalty              = 0;
          g1.months_left          = itr->maturity;
-         g1.epoch_ist            = c.epoch_ist;
       });
 
       existing_lendings.modify(itr, N(adminb), [&]( auto& g) {
@@ -277,8 +271,7 @@ struct impl
                     
                     existing_lendings.modify(itr, N(adminlen), [&]( auto& g ) {
                         g.months_left          = c.months_left;
-                        g.penalty              = c.penalty*(itr->principal)/(itr1->net_borrowed); //dividing penalty by the ratio of money lended
-                        g.epoch_ist            = c.epoch_ist;
+                        g.penalty              = c.penalty*(itr->principal)/(itr1->net_borrowed); //dividing penalty by the ratio of money lender
                     });
                                         itr++;
                 }
