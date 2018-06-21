@@ -26,7 +26,6 @@ namespace p2p_lending {
       //@abi table
       struct lender_type {
             account_name     lender_n;//unique account name for lender
-            uint64_t         epoch_ist;//timestamp of last verification
             uint32_t         balance;//initializ to zero
             uint32_t         total_lending;//total lending so far,initialize to 0
             uint8_t          lending_score;//initilize to zero
@@ -36,7 +35,7 @@ namespace p2p_lending {
  
             auto primary_key()    const { return lender_n; }
 
-            EOSLIB_SERIALIZE( lender_type, (lender_n)(epoch_ist)(balance)(total_lending)(lending_score)(age)(verified) )
+            EOSLIB_SERIALIZE( lender_type, (lender_n)(balance)(total_lending)(lending_score)(age)(verified) )
       };
       //@abi action
       struct create_lender {
@@ -49,14 +48,13 @@ namespace p2p_lending {
        //@abi action
       struct update_l {
             account_name     lender_n;
-            uint64_t         epoch_ist;
             uint32_t         balance;
             uint8_t          lending_score;
             uint8_t          age;
             bool             verified;
            
 
-            EOSLIB_SERIALIZE( update_l, (lender_n)(epoch_ist)(balance)(lending_score)(age)(verified) )
+            EOSLIB_SERIALIZE( update_l, (lender_n)(balance)(lending_score)(age)(verified) )
       };
       //@abi action
       struct close_l {
@@ -67,7 +65,6 @@ namespace p2p_lending {
       //@abi table
       struct borrower_type {
             account_name     borrower_n;//unique account name for borrower
-            uint64_t         epoch_ist; //timestamp of last verification
             uint16_t         cibil_score; //initialize with 0, can only be changed by some authorizing authority
             uint8_t          age;//should be greater than or equal to 21
             uint32_t         income;//should be more than 3lakh
@@ -77,7 +74,7 @@ namespace p2p_lending {
             auto primary_key()      const { return borrower_n; }
 
 
-            EOSLIB_SERIALIZE( borrower_type, (borrower_n)(epoch_ist)(cibil_score)(age)(income)(verified) )
+            EOSLIB_SERIALIZE( borrower_type, (borrower_n)(cibil_score)(age)(income)(verified) )
       };
       //@abi action
       struct create_borrower {
@@ -96,14 +93,13 @@ namespace p2p_lending {
       //@abi action
       struct update_b {
             account_name     borrower_n;
-            uint64_t         epoch_ist;
             uint16_t         cibil_score;
             uint8_t          age;
             uint32_t         income;
             bool             verified;
         
 
-            EOSLIB_SERIALIZE( update_b, (borrower_n)(epoch_ist)(cibil_score)(age)(income)(verified))
+            EOSLIB_SERIALIZE( update_b, (borrower_n)(cibil_score)(age)(income)(verified))
       };
       //@abi table
       struct lending {
@@ -113,12 +109,11 @@ namespace p2p_lending {
             uint8_t           maturity;
             uint8_t           interest;
             uint32_t          emi;
-            uint64_t          epoch_ist;//time of start of the lending
 
             auto primary_key()          const { return borrower_n; }
           
 
-            EOSLIB_SERIALIZE( lending, (borrower_n)(net_borrowed)(amount_left)(maturity)(interest)(emi)(epoch_ist) )
+            EOSLIB_SERIALIZE( lending, (borrower_n)(net_borrowed)(amount_left)(maturity)(interest)(emi) )
       };
       struct lending_info {
 
@@ -127,12 +122,11 @@ namespace p2p_lending {
             uint32_t          penalty;
             uint32_t          principal;
             uint8_t           months_left;
-            uint64_t          epoch_ist;//time of start/last_update in lending
 
             auto primary_key()          const { return lender_n; }
             account_name get_borrower()       const {return borrower_n;}
 
-            EOSLIB_SERIALIZE( lending_info, (lender_n)(borrower_n)(penalty)(principal)(months_left)(epoch_ist) )
+            EOSLIB_SERIALIZE( lending_info, (lender_n)(borrower_n)(penalty)(principal)(months_left))
       };
 
       //@abi action
@@ -142,18 +136,16 @@ namespace p2p_lending {
             uint8_t           maturity;
             uint8_t           interest;
             uint32_t          emi;
-            uint64_t          epoch_ist;//time of start of the lending
            
 
-            EOSLIB_SERIALIZE( create_lending, (borrower_n)(net_borrowed)(maturity)(interest)(emi)(epoch_ist) )
+            EOSLIB_SERIALIZE( create_lending, (borrower_n)(net_borrowed)(maturity)(interest)(emi))
       };
         struct create_lending_info {
             account_name      borrower_n;
             account_name      lender_n; 
             uint32_t          principal;
-            uint64_t          epoch_ist;//time of start/last_update in lending
 
-            EOSLIB_SERIALIZE( create_lending_info, (borrower_n)(lender_n)(principal)(epoch_ist) )
+            EOSLIB_SERIALIZE( create_lending_info, (borrower_n)(lender_n)(principal))
       };
 
       //@abi action
@@ -161,10 +153,9 @@ namespace p2p_lending {
             account_name   borrower_n;
             uint8_t        months_left;
             uint32_t       penalty;
-            uint64_t       epoch_ist;
            
 
-            EOSLIB_SERIALIZE( update_lending, (borrower_n)(months_left)(penalty)(epoch_ist) )
+            EOSLIB_SERIALIZE( update_lending, (borrower_n)(months_left)(penalty) )
       };
 
       /**
