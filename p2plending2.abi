@@ -9,7 +9,6 @@
       "base": "",
       "fields": [
         {"name":"lender_n", "type":"account_name"},
-        {"name":"epoch_ist", "type":"uint64"},
         {"name":"balance", "type":"uint32"},
         {"name":"total_lending", "type":"uint32"},
         {"name":"lending_score", "type":"uint8"},
@@ -29,7 +28,6 @@
       "base": "",
       "fields": [
         {"name":"lender_n", "type":"account_name"},
-        {"name":"epoch_ist", "type":"uint64"},
         {"name":"balance", "type":"uint32"},
         {"name":"lending_score", "type":"uint8"},
         {"name":"age", "type":"uint8"},
@@ -47,7 +45,6 @@
       "base": "",
       "fields": [
         {"name":"borrower_n", "type":"account_name"},
-        {"name":"epoch_ist", "type":"uint64"},
         {"name":"cibil_score", "type":"uint16"},
         {"name":"age", "type":"uint8"},
         {"name":"income", "type":"uint32"},
