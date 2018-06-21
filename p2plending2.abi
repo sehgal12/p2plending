@@ -70,7 +70,6 @@
       "base": "",
       "fields": [
         {"name":"borrower_n", "type":"account_name"},
-        {"name":"epoch_ist", "type":"uint64"},
         {"name":"cibil_score", "type":"uint16"},
         {"name":"age", "type":"uint8"},
         {"name":"income", "type":"uint32"},
@@ -86,8 +85,7 @@
         {"name":"amount_left", "type":"uint32"},
         {"name":"maturity", "type":"uint8"},
         {"name":"interest", "type":"uint8"},
-        {"name":"emi", "type":"uint32"},
-        {"name":"epoch_ist", "type":"uint64"}
+        {"name":"emi", "type":"uint32"}
       ]
     },{
       "name": "lending_info",
@@ -97,8 +95,7 @@
         {"name":"borrower_n", "type":"account_name"},
         {"name":"penatly", "type":"uint32"},
         {"name":"principal", "type":"uint32"},
-        {"name":"months_left", "type":"uint8"},
-        {"name":"epoch_ist", "type":"uint64"}
+        {"name":"months_left", "type":"uint8"}
       ]
     },{
       "name": "create_lending",
@@ -108,8 +105,7 @@
         {"name":"net_borrowed", "type":"uint32"},
         {"name":"maturity", "type":"uint8"},
         {"name":"interest", "type":"uint8"},
-        {"name":"emi", "type":"uint32"},
-        {"name":"epoch_ist", "type":"uint64"}
+        {"name":"emi", "type":"uint32"}
       ]
     },{
       "name": "create_lending_info",
@@ -117,8 +113,7 @@
       "fields": [
         {"name":"borrower_n", "type":"account_name"},
         {"name":"lender_n", "type":"account_name"},
-        {"name":"principal", "type":"uint32"},
-        {"name":"epoch_ist", "type":"uint64"}
+        {"name":"principal", "type":"uint32"}
       ]
     },{
       "name": "update_lending",
@@ -126,8 +121,7 @@
       "fields": [
         {"name":"borrower_n", "type":"account_name"},
         {"name":"months_left", "type":"uint8"},
-        {"name":"penatly", "type":"uint32"},
-        {"name":"epoch_ist", "type":"uint64"}
+        {"name":"penatly", "type":"uint32"}
       ]
     }
   ],
