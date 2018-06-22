@@ -121,7 +121,7 @@
       "fields": [
         {"name":"borrower_n", "type":"account_name"},
         {"name":"months_left", "type":"uint8"},
-        {"name":"penatly", "type":"uint32"}
+        {"name":"penalty", "type":"uint32"}
       ]
     }
   ],
